@@ -1,6 +1,6 @@
 [build]
   publish = ".next"
-  command = "TINA_CLIENT_ID=$CLIENT_ID, TINA_TOKEN=$TOKEN npm run build"
+  command = "TINA_CLIENT_ID=$CITE_ID, TINA_TOKEN=$TOKEN npm run build"
 
 
 [build.environment]
