@@ -1,0 +1,7 @@
+[build]
+  publish = ".next"
+  command = "TINA_CLIENT_ID=$CLIENT_ID, TINA_TOKEN=$TOKEN npm run build"
+
+
+[build.environment]
+  HUGO_VERSION = "0.60.1"
