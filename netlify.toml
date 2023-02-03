@@ -1,9 +1,7 @@
 [build]
   publish = "public"
-  command = "npm run build"
+  command = "CLIENT_ID=$clientID, TOKEN=$token npm run build"
 
 
 [build.environment]
   HUGO_VERSION = "0.60.1"
-  TINA_CLIENT_ID="CITE_ID"
-  TINA_TOKEN="TOKEN" 
