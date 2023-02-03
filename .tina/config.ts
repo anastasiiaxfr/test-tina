@@ -12,6 +12,7 @@ const sec = new Date().getSeconds();
 
 
 
+
 export default defineStaticConfig({
   clientId: "47b5f8ef-7e45-4d4a-90c5-fd47594a1dc8",
   token: "88f5791c3bcffae21cfa9df726759b8707404db4",
@@ -29,13 +30,34 @@ export default defineStaticConfig({
   schema: {
     collections: [
       {
+        name: "author",
+        label: "Authors",
+        path: "content/autthors",
+        defaultItem: () => {
+          return {
+            // When a new post is created the title field will be set to "New post"
+            title: `author-${year}-${month}-${day}-${hour}-${min}`,
+          }
+        },
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+        ],
+      },
+ 
+      {
         name: "post",
         label: "Posts",
         path: "content/posts",
         defaultItem: () => {
           return {
             // When a new post is created the title field will be set to "New post"
-            title: `post-${year}-${month}-${day}-${hour}-${min}-${sec}`,
+            title: `post-${year}-${month}-${day}-${hour}-${min}`,
           }
         },
         fields: [
@@ -59,6 +81,12 @@ export default defineStaticConfig({
             type: "boolean",
             name: "draft",
             label: "Draft",
+          },
+          {
+            label: 'Author',
+            name: 'author',
+            type: 'reference',
+            collections: ['author'], // points to a collection with the name "author"
           },
           {
             label: 'Categories',
@@ -99,5 +127,5 @@ export default defineStaticConfig({
         ],
       },
     ],
-  },
+  }, 
 });
