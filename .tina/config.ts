@@ -1,11 +1,20 @@
-import { defineStaticConfig } from "tinacms";
+import { defineSchema, defineStaticConfig } from "tinacms";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 
+const year = new Date().getFullYear();
+const month = new Date().getMonth() + 1;
+const day = new Date().getDate();
+const hour = new Date().getHours();
+const min = new Date().getMinutes();
+const sec = new Date().getSeconds();
+
+
+
 export default defineStaticConfig({
-  clientId: process.env.CLIENT_ID,
-  token: process.env.TOKEN,
+  clientId: "47b5f8ef-7e45-4d4a-90c5-fd47594a1dc8",
+  token: "88f5791c3bcffae21cfa9df726759b8707404db4",
   branch,
   build: {
     outputFolder: "admin",
@@ -23,6 +32,12 @@ export default defineStaticConfig({
         name: "post",
         label: "Posts",
         path: "content/posts",
+        defaultItem: () => {
+          return {
+            // When a new post is created the title field will be set to "New post"
+            title: `post-${year}-${month}-${day}-${hour}-${min}-${sec}`,
+          }
+        },
         fields: [
           {
             type: "string",
@@ -31,10 +46,14 @@ export default defineStaticConfig({
             isTitle: true,
             required: true,
           },
+          
           {
             type: "datetime",
             label: "Date",
             name: "date",
+            ui: {
+              dateFormat: 'YYYY-MM-DD / HH:mm',
+            }
           },
           {
             type: "boolean",
@@ -42,11 +61,41 @@ export default defineStaticConfig({
             label: "Draft",
           },
           {
+            label: 'Categories',
+            name: 'categories',
+            type: 'string',
+            list: true,
+            options: [
+              {
+                value: 'movies',
+                label: 'Movies',
+              },
+              {
+                value: 'music',
+                label: 'Music',
+              },
+            ],
+          },
+          {
+            label: 'Tags',
+            name: 'tags',
+            type: 'string',
+            list: true,
+          },
+          {
+            type: 'string',
+            label: 'Topic',
+            name: 'topic',
+            options: ['programming', 'blacksmithing'],
+          },
+          { label: "Image", name: "image", type: "image" },
+          {
             type: "rich-text",
             name: "body",
             label: "Body",
             isBody: true,
           },
+
         ],
       },
     ],
