@@ -5,9 +5,5 @@
 
 [build.environment]
   HUGO_VERSION = "0.60.1"
-
-[[plugins]]
-  package = "netlify-plugin-inline-functions-env"
-  [plugins.inputs]
-  include = ["CITE_ID"]
-  include = ["TOKEN"]
+  TINA_CLIENT_ID="CITE_ID"
+  TINA_TOKEN="TOKEN" 
